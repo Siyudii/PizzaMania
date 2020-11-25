@@ -1,0 +1,124 @@
+<html>
+    <head>
+
+        {% load static %}
+
+        <!-- <link rel="stylesheet" href="{% static 'css/user.css' %}"> -->
+        
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <script src="{% static 'js/user.js' %}"></script>
+    
+    </head>
+    <title>user</title>
+    
+    <body>
+
+<div>
+        <h1>
+            hello, {{ user.username }}
+        </h1>
+        <li>
+            Currently logged in as : {{ user.username }}
+        </li>
+        <li>
+            <a href="{% url 'logout' %}"> logout</a>
+        </li>
+        <table>
+            <tr>
+                <td>Pizza</td>
+                <td>Small</td>
+                <td>Large</td>
+                
+                
+            </tr>
+            {% for menu in menu %}
+            <tr>
+                <td class="pizza" id="{{ menu.primaryKey }}">{{ menu.pizza }}</td>
+                <td>{{ menu.small }}</td>
+                <td>{{ menu.large }}</td>
+                <td><button onclick="minus('{{ forloop.counter }}','{{ menu.primaryKey }}')">-</button> </td>
+                <td><p id="count{{ forloop.counter }}" data-counter="0">0</p></td> 
+                <td><button  onclick="plus('{{ forloop.counter }}','{{ menu.primaryKey }}')" class=".btn"  >+</button> </td>
+                <!-- <td><button onclick="toppings()" >Add extra toppings</button></td> -->
+            </tr>
+
+            {% endfor %}
+            
+            
+
+        </table>
+        
+
+
+       
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title" id="exampleModalLongTitle">Want to add some extra toppings ?</h3>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form onsubmit="getToppings(this)">
+        <table>
+        {% for toppings in toppings %}
+        <tr>
+          <td>{{ toppings.topping }}</td>
+          
+          <td>{{ toppings.charges }}</td>
+          <td><input type="checkbox" class="topp" name="toppings" value="{{ toppings.primaryKey }}" data-limit="{{ forloop.counter }}"></td>
+        </tr>
+        {% endfor %}
+      </table>
+    </form>
+      </div>
+      <div class="modal-footer">
+        <button onclick="plus.toppingsSamePrev()" type="button" id="SAP" class="btn btn-primary" data-dismiss="modal">Same as previous</button>
+        <button onclick="plus.getToppings()" type="button" id="Done" class="btn btn-primary">Done</button>
+        <button onclick="plus.cancel()" type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>
+        
+
+        
+        
+        
+    </body>
+</html>
+
+
+
+
+
+
+<div class="modal fade" id="Minusorders" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div id="MinusListOrder" class="modal-body">
+        <h1>hello</h1>
+        <table id="unminuslist">
+          <tbody>
+            
+          </tbody>
+        </table>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>

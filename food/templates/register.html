@@ -1,0 +1,20 @@
+<html>
+    <head>
+        
+    
+    </head>
+    <title>
+        register form
+    </title>
+    <body>
+        {% load bootstrap4 %}
+        {% load crispy_forms_tags %}
+        
+        <form method="POST" class="form-group">
+            {% csrf_token %}
+            {{ form|crispy }}
+            <button type="submit" class="btn btn-success">register</button>
+        </form>
+
+    </body>
+</html>

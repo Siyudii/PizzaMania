@@ -1,0 +1,42 @@
+<html>
+    <title>login</title>
+    <head>
+
+    </head>
+
+    <script>
+        
+            
+            document.addEventListener('DOMContentLoaded', function(){
+                if(document.getElementById("mes").length){
+
+                    console.log("hello");
+                    document.getElementById("pass").value='';
+            }
+            
+
+            });
+        
+    </script>
+    <body>
+        <h1>Login</h1>
+        {% if message %}
+
+        
+            <div id="mes">
+                {{ message }}
+            </div>
+            
+        {% endif %}
+
+        <form id="log_form" action="{% url 'login' %}" method="POST">
+            {% csrf_token %}
+            <input name="username" type="text" placeholder="username"/>
+            <input id="pass" name="password" type="password" placeholder="password"/>
+            <input type="submit" value="login"/>
+
+
+        </form>
+        <a href="{% url 'register' %}">register</a>
+    </body>
+</html>
